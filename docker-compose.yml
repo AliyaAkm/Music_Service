@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "8086:8086"
+    depends_on:
+      - redis
+      - db
+    env_file:
+      - .env
+    environment:
+      - REDIS_ADDR=redis:6379
+      - DB_HOST=db
+      - DB_PORT=5432
+    restart: unless-stopped
+
+  redis:
+    image: redis:7.2
+    ports:
+      - "6379:6379"
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: Inventory
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 23111974
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
