@@ -29,13 +29,11 @@ func (c *RedisCache) Get(key string) (string, error) {
 	log.Println("[CACHE] HIT", key)
 	return val, nil
 }
-
 func (c *RedisCache) Set(key string, value string, ttl time.Duration) error {
 	log.Println("[CACHE] SET", key)
 	log.Println("[CACHE] DATA =", value)
 	return c.client.Set(ctx, key, value, ttl).Err()
 }
-
 func (c *RedisCache) Del(key string) error {
 	log.Println("[CACHE] DEL", key)
 	return c.client.Del(ctx, key).Err()
