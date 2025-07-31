@@ -17,4 +17,4 @@ COPY --from=Builder /app/main .
 
 EXPOSE 8086
 
-CMD["./main"]
+CMD ["./main"]
