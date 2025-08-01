@@ -4,6 +4,9 @@ services:
   app:
     build:
       context: .
+    volumes:
+      - ./logs:/app/logs
+      - ./migrations:/app/migrations
     ports:
       - "8086:8086"
     depends_on:

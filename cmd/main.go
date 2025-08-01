@@ -3,6 +3,7 @@ package main
 import (
 	"PracticeCrud/internal/cache"
 	"PracticeCrud/internal/middleware"
+	"PracticeCrud/internal/migrations"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"log"
 	"net/http"
@@ -25,7 +26,7 @@ func main() {
 	if err != nil {
 		log.Fatal("Error reading config:", err)
 	}
-
+	migrations.Run(cfg.Db)
 	db := NewDBConnection(cfg.Db)
 
 	repo := postgres.NewSongRepo(db)
